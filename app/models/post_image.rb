@@ -3,6 +3,11 @@ class PostImage < ApplicationRecord
    belongs_to :user
    has_many :post_comments, dependent: :destroy
    has_many :favorites, dependent: :destroy
+ # ショップ名が存在しているかを確認するバリデーション
+  validates :shop_name, presence: true
+
+  # 画像が存在しているかを確認するバリデーション
+  validates :image, presence: true
   
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
