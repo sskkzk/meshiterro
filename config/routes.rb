@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'homes/about', to: 'homes#about', as: 'about'
   
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+    # 今まではresourcesでしたが、ここでは、resourceとなっている点に注目してください。 単数形にすると、/:idがURLに含まれなくなります。
+    resource :favorite, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
